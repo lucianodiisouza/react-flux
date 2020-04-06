@@ -11,10 +11,15 @@ class TodoItem extends Component {
     super(props);
     this.remove = this.remove.bind(this);
     this.update = this.update.bind(this);
+    this.check = this.check.bind(this);
 
     this.input = React.createRef();
   }
-
+  check(){
+    const { item } = this.props;
+    item.isChecked = !item.isChecked;
+    this.props.onUpdate(item);
+  }
   remove() {
     this.props.onRemove(this.props.item.id);
   }
@@ -31,7 +36,7 @@ class TodoItem extends Component {
 
     return (
       <li className="todo-list-item">
-        <input className="tw-check" type="checkbox" checked={item.isChecked} />
+        <input className="tw-check" type="checkbox" checked={item.isChecked} onChange={this.check} />
         <input
           type="text"
           className="tw-input"
