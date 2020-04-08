@@ -3,16 +3,9 @@ import * as TodoConstants from "../actions/TodoActions";
 const TodoReducer = (todoList = [], action) => {
   switch (action.type) {
     case TodoConstants.TODO_CREATE:
-      return [
-        ...todoList,
-        {
-          id: Date.now(),
-          isChecked: false,
-          description: action.description,
-        },
-      ];
+      return [...todoList, action.newItem];
     case TodoConstants.TODO_REMOVE:
-      const itemIndex = todoList.findIndex((item) => item.id == action.id);
+      const itemIndex = todoList.findIndex((item) => item.id === action.id);
       return [
         ...todoList.slice(0, itemIndex),
         ...todoList.slice(itemIndex + 1),
@@ -26,6 +19,8 @@ const TodoReducer = (todoList = [], action) => {
         }
         return item;
       });
+    case TodoConstants.TODO_LIST:
+      return action.todoList;
     default:
       return todoList;
   }

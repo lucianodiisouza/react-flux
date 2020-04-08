@@ -8,6 +8,10 @@ import * as TodoActions from "./data/actions/TodoActions";
 import { connect } from "react-redux";
 
 class App extends Component {
+  componentDidMount() {
+    this.props.dispatch(TodoActions.list());
+  }
+
   render() {
     const { props } = this,
       { dispatch } = props;
@@ -19,12 +23,12 @@ class App extends Component {
           }}
         />
         <hr />
-        <button 
-          className="tw-btn" 
+        <button
+          className="tw-btn"
           onClick={() => {
-            dispatch(TodoActions.clear())
+            dispatch(TodoActions.clear());
           }}
-          >
+        >
           Limpar
         </button>
         <hr />
@@ -33,7 +37,9 @@ class App extends Component {
           onRemove={(id) => {
             dispatch(TodoActions.remove(id));
           }}
-          onUpdate={(item) => {dispatch(TodoActions.update(item))}}
+          onUpdate={(item) => {
+            dispatch(TodoActions.update(item));
+          }}
         />
       </div>
     );
