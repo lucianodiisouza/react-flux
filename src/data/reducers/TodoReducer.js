@@ -10,8 +10,6 @@ const TodoReducer = (todoList = [], action) => {
         ...todoList.slice(0, itemIndex),
         ...todoList.slice(itemIndex + 1),
       ];
-    case TodoConstants.TODO_CLEAR:
-      return todoList.filter((item) => !item.isChecked);
     case TodoConstants.TODO_UPDATE:
       return todoList.map((item) => {
         if (item.id === action.item.id) {
